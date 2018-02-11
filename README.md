@@ -1,74 +1,21 @@
-# Dependencies
+## To start backend just run commands listed below.
 
-- sqlite3
-- node
-- npm
+### 1. Install packages
 
-# Getting Started
+### `npm install`
 
-###### Install npm dependencies
-`npm install`
+##### or
 
-###### Run the node server
-`node app.js`
+### `yarn install`
 
-###### Viewing the application in your browser
-`http://localhost:8000`
+### 2. Start the project
 
-# Schema
+### `npm start`
 
-## Customers
+##### or
 
-- id (integer)
-- name (string)
-- address (string)
-- phone (string)
+### `yarn start`
 
+## Then go to `client` folder and run same commands:
 
-## Products
-
-- id (integer)
-- name (string)
-- price (decimal)
-
-## Invoices
-
-- id (integer)
-- customer_id (integer)
-- discount (decimal)
-- total (decimal)
-
-## InvoiceItems
-
-- id (integer)
-- invoice_id (integer)
-- product_id (integer)
-- quantity (decimal)
-
-
-# Resources
-
-## Customers
-```
-GET|POST          /api/customers
-GET|PUT|DELETE    /api/customers/{id}
-```
-
-## Products
-```
-GET|POST          /api/products
-GET|PUT|DELETE    /api/products/{id}
-```
-## Invoices
-```
-GET|POST          /api/invoices
-GET|PUT|DELETE    /api/invoices/{id}
-```
-
-## InvoiceItems
-```
-GET|POST          /api/invoices/{id}/items
-GET|PUT|DELETE    /api/invoices/{invoice_id}/items/{id}
-```
-
-
+### `cd client && yarn install && yarn start`

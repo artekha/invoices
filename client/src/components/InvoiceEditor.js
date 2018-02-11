@@ -345,7 +345,7 @@ class InvoiceEditor extends Component {
                             onClick={this.changeQuantity.bind(this, invoiceItem, 'decrease')}>-</Button>
                         </InputGroupAddon>
                         <Input
-                          defaultValue={invoiceItem.quantity}
+                          value={invoiceItem.quantity}
                           onChange={this.inputQuantity.bind(this, invoiceItem)}
                           onBlur={this.onblurQuantity.bind(this)}
                           className="text-center"
@@ -374,7 +374,7 @@ class InvoiceEditor extends Component {
           : <h5>Products not selected</h5>
         }
         <Input
-          defaultValue={this.state.invoice.discount}
+          value={this.state.invoice.discount}
           onChange={this.inputDiscount.bind(this)}
           onBlur={this.onblurDiscount.bind(this)}
           type="number"></Input>

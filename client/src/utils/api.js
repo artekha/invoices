@@ -9,6 +9,18 @@ import {
 export const getProducts = () =>
   getData('products');
 
+export const getProduct = id =>
+  getData(`products/${id}`);
+
+export const createProduct = data =>
+  postData('products');
+
+export const updateProduct = (id, data) =>
+  putData(`products/${id}`, data);
+
+export const deleteProduct = id =>
+  deleteData(`products/${id}`);
+
 export const getCustomers = () =>
   getData('customers');
 
@@ -17,6 +29,9 @@ export const getCustomer = id =>
 
 export const createCustomer = data =>
   postData('customers');
+
+export const updateCustomer = (id, data) =>
+  putData(`customers/${id}`, data);
 
 export const deleteCustomer = id =>
   deleteData(`customers/${id}`);

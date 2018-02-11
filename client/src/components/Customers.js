@@ -36,11 +36,7 @@ class Customers extends Component {
   }
 
   createCustomer = () => {
-    const newCustomer = {
-      discount: 0,
-      total: 0
-    }
-    createCustomer(newCustomer)
+    createCustomer()
       .then(res => this.redirect(res.id));
   }
 
@@ -52,7 +48,7 @@ class Customers extends Component {
       })
   }
 
-  redirect = (id) => {
+  redirect = id => {
     this.props.history.push(`/customer?id=${id}`)
   }
 
