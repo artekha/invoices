@@ -205,7 +205,7 @@ class InvoiceEditor extends Component {
     if (discount > 100) {
       discount = 100;
     }
-    discount = parseInt(discount);
+    discount = +discount.toFixed(2);
     this.setState({
       invoice: {
         ...this.state.invoice,
@@ -218,6 +218,7 @@ class InvoiceEditor extends Component {
 
   onblurDiscount = e => {
     let discount = +e.target.value;
+    discount = +discount.toFixed(2);
     if (discount < 0) {
       e.target.value = 0;
     }
@@ -241,14 +242,13 @@ class InvoiceEditor extends Component {
     });
 
     let discount = s.invoice.discount;
-
-    console.log(s.invoice.discount);
+    let distract = 0;
 
     if (discount !== 0) {
-      discount = total * discount / 100 ;
+      distract = total * discount / 100 ;
     }
 
-    total -= discount;
+    total = total - distract;
 
     total = +total.toFixed(2);
 
