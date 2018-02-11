@@ -21,8 +21,6 @@ import {
   InputGroup,
   InputGroupAddon,
   Table,
-  Form,
-  FormGroup,
 } from 'reactstrap';
 
 import InvoiceEditorModal from './InvoiceEditorModal';
@@ -137,7 +135,7 @@ class InvoiceEditor extends Component {
         invoiceItems.slice(0, invoiceItemIndex)
           .concat(invoiceItems
             .slice(invoiceItemIndex + 1, invoiceItems.length)
-          );
+          )
 
       this.setState({
         invoiceItems: null
@@ -177,6 +175,7 @@ class InvoiceEditor extends Component {
 
   inputQuantity = (data, e) => {
     const newValue = +e.target.value;
+    e.target.value = parseInt(newValue, 10);
     const invoiceItemIndex = this.state.invoiceItems
       .findIndex(invoiceItem => invoiceItem.id === data.id);
     let invoiceItem = Object.assign({}, this.state.invoiceItems[invoiceItemIndex]);
