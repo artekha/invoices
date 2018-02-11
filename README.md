@@ -16,6 +16,6 @@
 
 ##### `yarn start`
 
-## Then go to `client` folder and run same commands:
+## Then go to `client` folder and run same commands.
 
 ##### `cd client && yarn install && yarn start`

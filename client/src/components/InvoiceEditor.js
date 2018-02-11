@@ -218,7 +218,7 @@ class InvoiceEditor extends Component {
 
   onblurDiscount = e => {
     let discount = +e.target.value;
-    discount = +discount.toFixed(2);
+    e.target.value = +discount.toFixed(2);
     if (discount < 0) {
       e.target.value = 0;
     }
