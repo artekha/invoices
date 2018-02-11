@@ -43,7 +43,7 @@ export const getInvoice = id =>
   getData(`invoices/${id}`);
 
 export const createInvoice = data =>
-  postData('invoices');
+  postData('invoices', data);
 
 export const updateInvoice = (id, data) =>
   putData(`invoices/${id}`, data);

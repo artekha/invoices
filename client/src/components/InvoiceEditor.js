@@ -21,6 +21,8 @@ import {
   InputGroup,
   InputGroupAddon,
   Table,
+  Form,
+  FormGroup,
 } from 'reactstrap';
 
 import InvoiceEditorModal from './InvoiceEditorModal';
@@ -40,7 +42,7 @@ class InvoiceEditor extends Component {
     const invoiceId = parse(this.props.location.search);
     this.getCustomersAndProducts().then(() => {
       getInvoice(invoiceId.id)
-        .then(invoice => this.setState({ invoice }));
+        .then(invoice => this.setState({ invoice }))
 
       getInvoiceItems(invoiceId.id)
         .then(invoiceItems => this.setState({ invoiceItems }));
@@ -203,13 +205,14 @@ class InvoiceEditor extends Component {
     if (discount > 100) {
       discount = 100;
     }
+    discount = parseInt(discount);
     this.setState({
       invoice: {
         ...this.state.invoice,
         discount
       }
     }, () => {
-      updateInvoice(this.state.invoice.id, { discount });
+      updateInvoice(this.state.invoice.id, this.state.invoice)
     });
   }
 
@@ -237,10 +240,12 @@ class InvoiceEditor extends Component {
       total += +invoiceItemPrice;
     });
 
-    let discount = 0;
+    let discount = s.invoice.discount;
 
-    if (s.invoice.discount !== 0) {
-      discount = (s.invoice.discount / 100 * total);
+    console.log(s.invoice.discount);
+
+    if (discount !== 0) {
+      discount = total * discount / 100 ;
     }
 
     total -= discount;
@@ -274,7 +279,7 @@ class InvoiceEditor extends Component {
       <div>
         <h1 className="text-center">New invoice</h1>
         <Row>
-          <Col xs="2"><h3>Customer</h3></Col>
+          <Col xs="2"><h4>Customer</h4></Col>
           <Col xs="10">
             <Button
               color="success"
@@ -289,18 +294,19 @@ class InvoiceEditor extends Component {
           !customer
           ? <h5>Customer not selected</h5>
           : <div>
-              <div>{customer.name} - {customer.phone}</div>
-              <Button
-                color="danger"
-                size="sm"
-                onClick={this.selectCustomer.bind(this, null)}
-              >
-                Delete
-              </Button>
+              <div>{customer.name} - {customer.phone}{' '}
+                <Button
+                  color="danger"
+                  size="sm"
+                  onClick={this.selectCustomer.bind(this, null)}
+                >
+                  Delete
+                </Button>
+              </div>
             </div>
         }
         <Row>
-          <Col xs="2"><h3>Products</h3></Col>
+          <Col xs="2"><h4>Products</h4></Col>
           <Col xs="10">
             <Button
               color="success"
@@ -345,7 +351,7 @@ class InvoiceEditor extends Component {
                             onClick={this.changeQuantity.bind(this, invoiceItem, 'decrease')}>-</Button>
                         </InputGroupAddon>
                         <Input
-                          value={invoiceItem.quantity}
+                          defaultValue={invoiceItem.quantity}
                           onChange={this.inputQuantity.bind(this, invoiceItem)}
                           onBlur={this.onblurQuantity.bind(this)}
                           className="text-center"
@@ -373,8 +379,9 @@ class InvoiceEditor extends Component {
           </Table>
           : <h5>Products not selected</h5>
         }
+        <h4>Discount:</h4>
         <Input
-          value={this.state.invoice.discount}
+          defaultValue={this.state.invoice.discount}
           onChange={this.inputDiscount.bind(this)}
           onBlur={this.onblurDiscount.bind(this)}
           type="number"></Input>
